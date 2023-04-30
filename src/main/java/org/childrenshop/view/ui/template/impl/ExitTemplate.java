@@ -10,6 +10,6 @@ public class ExitTemplate implements Template {
 
     @Override
     public void output() {
-        ui.output("Application closed");
+        ui.output("\nApplication closed");
     }
 }
