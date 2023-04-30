@@ -1,0 +1,17 @@
+package org.childrenshop.view.ui.menu;
+
+import org.childrenshop.view.ui.template.impl.AddToyTemplate;
+import org.childrenshop.view.ui.template.impl.ExitTemplate;
+
+import java.util.Arrays;
+import java.util.List;
+
+public interface GeneralMenu {
+    String header = "\nPhone Book\n";
+    List<MenuItem> generalMenuItems = Arrays.asList(
+            new MenuItem[] {
+                    new MenuItem("1. Add toy", () -> new AddToyTemplate().output()),
+                    new MenuItem("2. Exit", () -> new ExitTemplate().output())
+            }
+    );
+}
