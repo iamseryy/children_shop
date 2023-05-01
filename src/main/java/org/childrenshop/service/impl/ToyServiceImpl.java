@@ -12,9 +12,12 @@ public class ToyServiceImpl implements ToyService {
     private static Toys toys = ToysImpl.getInstance();
     @Override
     public int add(Toy toy) {
-        return toys.add(toy);
+        return this.toys.add(toy);
     }
-
+    @Override
+    public void update(Toy toy) {
+        this.toys.update(toy);
+    }
     @Override
     public Optional<Toy> findById(int id) {
         return this.toys.findById(id);
@@ -27,6 +30,6 @@ public class ToyServiceImpl implements ToyService {
 
     @Override
     public void delete(Toy toy) {
-
+        this.toys.delete(toy);
     }
 }

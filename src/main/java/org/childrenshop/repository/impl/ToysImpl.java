@@ -32,6 +32,14 @@ public class ToysImpl implements Toys {
     }
 
     @Override
+    public void update(Object entity) {
+         var currentToy = this.toys.stream().filter(toy -> toy.id() == ((Toy) entity).id()).findAny().get();
+         this.toys.remove(currentToy);
+         this.toys.add((Toy) entity);
+         writeAll();
+    }
+
+    @Override
     public Optional findById(int id) {
         return this.toys.stream().filter(toy -> toy.id() == id).findAny();
     }
@@ -39,16 +47,19 @@ public class ToysImpl implements Toys {
     @Override
     public void delete(Object entity) {
         this.toys.remove((Toy) entity);
-        var toyList = new ArrayList<Toy>(this.toys);
-        toyList.sort(Comparator.comparing(Toy::id));
-        FileUtils.writeFile("", AppConfig.getProperty("file.toys"), false);
-        toyList.forEach(toy -> FileUtils.writeFile(toy.toString() + "\n", AppConfig.getProperty("file.toys"), true));
-
+        writeAll();
     }
 
     @Override
     public HashSet findAll() {
         return this.toys;
+    }
+
+    private void writeAll(){
+        var toyList = new ArrayList<Toy>(this.toys);
+        toyList.sort(Comparator.comparing(Toy::id));
+        FileUtils.writeFile("", AppConfig.getProperty("file.toys"), false);
+        toyList.forEach(toy -> FileUtils.writeFile(toy.toString() + "\n", AppConfig.getProperty("file.toys"), true));
     }
 
     private static HashSet<Toy> initCollection() {

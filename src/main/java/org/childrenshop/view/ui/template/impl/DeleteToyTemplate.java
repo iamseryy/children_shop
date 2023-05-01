@@ -5,10 +5,10 @@ import org.childrenshop.view.ui.template.Template;
 
 import java.util.Optional;
 
-public class EditToyTemplate implements Template {
+public class DeleteToyTemplate implements Template {
     @Override
     public void output() {
-        ui.output("\nEdit Toy");
+        ui.output("\nDelete Toy");
 
         int id = 0;
         while (true){
@@ -30,7 +30,7 @@ public class EditToyTemplate implements Template {
 
         var toyOptional = toyService.findById(id);
         if(toyOptional.isEmpty()){
-            ui.output("\nNo toy found\n");
+            ui.output("\nNo note found\n");
             ui.pressEnterToContinue();
             return;
         }
@@ -39,36 +39,16 @@ public class EditToyTemplate implements Template {
 
         ui.output("\nID: " + toy.id() + "\nName: " + toy.name() + "\nHeft: " + toy.heft());
 
-        Optional<String> nameOptional = ui.input("\nEnter toy name or an empty string to skip: ", String::toString);
-        String name = toy.name();
-        if(nameOptional.isPresent()){
-            name = nameOptional.get();
-        }
+        Optional<String> answer = ui.input("\nDo you want to delete a toy? (1 - yes / any other key - no): ", String::toString);
 
-        int heft = 0;
-        while (true) {
-            Optional<Integer> heftOptional = ui.input("\nEnter heft in percent or an empty string to skip: ", Integer::parseInt);
-
-            if (heftOptional.isEmpty()) {
-                heft = toy.heft();
-                break;
-            }
-
-            if (heftOptional.get() < 1 || heftOptional.get() > 100) {
-                ui.output("Value must be between 0 and 100! Try Again");
-                continue;
-            }
-            heft = heftOptional.get();
-
-            break;
-        }
-
-        if (name == toy.name() && heft == toy.heft()){
+        if (answer.isEmpty() || !answer.get().equals("1")) {
             ui.output("\nCancelled\n");
+            ui.pressEnterToContinue();
             return;
         }
 
-        toyService.update(new Toy(id, name, heft));
+        toyService.delete(toy);
+
         ui.output("\ndone");
         ui.pressEnterToContinue();
     }
