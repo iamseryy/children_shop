@@ -17,12 +17,12 @@ public class ToyServiceImpl implements ToyService {
 
     @Override
     public Optional<Toy> findById(int id) {
-        return Optional.empty();
+        return this.toys.findById(id);
     }
 
     @Override
     public HashSet<Toy> findAll() {
-        return null;
+        return this.toys.findAll();
     }
 
     @Override

@@ -6,6 +6,7 @@ import org.childrenshop.repository.Toys;
 import org.childrenshop.utils.FileUtils;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Optional;
 
@@ -26,23 +27,28 @@ public class ToysImpl implements Toys {
     @Override
     public int add(Object entity) {
         this.toys.add((Toy) entity);
-        FileUtils.writeFile("\n" + ((Toy) entity).toString(), AppConfig.getProperty("file.toys"), true);
+        FileUtils.writeFile(((Toy) entity).toString() + "\n", AppConfig.getProperty("file.toys"), true);
         return ((Toy) entity).id();
     }
 
     @Override
     public Optional findById(int id) {
-        return Optional.empty();
+        return this.toys.stream().filter(toy -> toy.id() == id).findAny();
     }
 
     @Override
     public void delete(Object entity) {
+        this.toys.remove((Toy) entity);
+        var toyList = new ArrayList<Toy>(this.toys);
+        toyList.sort(Comparator.comparing(Toy::id));
+        FileUtils.writeFile("", AppConfig.getProperty("file.toys"), false);
+        toyList.forEach(toy -> FileUtils.writeFile(toy.toString() + "\n", AppConfig.getProperty("file.toys"), true));
 
     }
 
     @Override
     public HashSet findAll() {
-        return null;
+        return this.toys;
     }
 
     private static HashSet<Toy> initCollection() {
@@ -50,10 +56,11 @@ public class ToysImpl implements Toys {
         ArrayList<String> data = FileUtils.readFile(AppConfig.getProperty("file.toys"));
 
         for (String line: data) {
-            String[] values = line.split(COMMA_DELIMITER);
-            int personId = Integer.parseInt(values[0]);
-            String note = values[1];
-            toys.add(new Toy(personId, note));
+            String[] values = line.split(";");
+            int id = Integer.parseInt(values[0]);
+            String name = values[1];
+            int heft = Integer.parseInt(values[2]);
+            toys.add(new Toy(id, name, heft));
         }
 
         return toys;
