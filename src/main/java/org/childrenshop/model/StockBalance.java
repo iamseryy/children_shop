@@ -1,4 +1,4 @@
 package org.childrenshop.model;
 
-public record StockBalance(int toyId, int quantity, int heft) {
+public record StockBalance(int toyId, int quantity) {
 }
