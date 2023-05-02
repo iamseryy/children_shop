@@ -1,7 +1,6 @@
 package org.childrenshop.view.ui.template.impl;
 
 import org.childrenshop.model.StockBalance;
-import org.childrenshop.model.Toy;
 import org.childrenshop.view.ui.template.Template;
 
 import java.util.ArrayList;
