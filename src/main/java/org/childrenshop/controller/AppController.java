@@ -1,6 +1,6 @@
 package org.childrenshop.controller;
 
-import org.childrenshop.view.ui.menu.impl.GeneralMenuImpl;
+import org.childrenshop.view.menu.impl.GeneralMenuImpl;
 
 public class AppController {
     public static void start(){
