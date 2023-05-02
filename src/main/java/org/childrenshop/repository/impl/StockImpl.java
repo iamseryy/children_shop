@@ -28,7 +28,7 @@ public class StockImpl implements Stock {
     @Override
     public int add(Object entity) {
         this.balance.add((StockBalance) entity);
-        FileUtils.writeFile(((StockBalance) entity).toString() + "\n", AppConfig.getProperty("file.stock_balance"), true);
+        FileUtils.writeFile(((StockBalance) entity).toString() + "\n", AppConfig.getProperty("file.stock"), true);
         return ((StockBalance) entity).toyId();
     }
 
@@ -59,13 +59,13 @@ public class StockImpl implements Stock {
     private void writeAll(){
         var positionList = new ArrayList<StockBalance>(this.balance);
         positionList.sort(Comparator.comparing(StockBalance::toyId));
-        FileUtils.writeFile("", AppConfig.getProperty("file.stock_balance"), false);
-        positionList.forEach(position -> FileUtils.writeFile(position.toString() + "\n", AppConfig.getProperty("file.stock_balance"), true));
+        FileUtils.writeFile("", AppConfig.getProperty("file.stock"), false);
+        positionList.forEach(position -> FileUtils.writeFile(position.toString() + "\n", AppConfig.getProperty("file.stock"), true));
     }
 
     private static HashSet<StockBalance> initCollection() {
         HashSet<StockBalance> stockBalance = new HashSet<>();
-        ArrayList<String> data = FileUtils.readFile(AppConfig.getProperty("file.stock_balance"));
+        ArrayList<String> data = FileUtils.readFile(AppConfig.getProperty("file.stock"));
 
         for (String line: data) {
             String[] values = line.split(";");

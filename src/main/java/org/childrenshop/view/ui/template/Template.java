@@ -9,7 +9,7 @@ import org.childrenshop.view.ui.impl.UserInterfaceImpl;
 
 public interface Template<T> {
     ToyService toyService = new ToyServiceImpl();
-    StockService phoneService = new StockServiceImpl();
+    StockService stockService = new StockServiceImpl();
     UserInterface ui = new UserInterfaceImpl();
     void output();
 }

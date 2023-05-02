@@ -13,9 +13,10 @@ public interface GeneralMenu {
                     new MenuItem("2. Edit toy", () -> new EditToyTemplate().output()),
                     new MenuItem("3. Delete toy", () -> new DeleteToyTemplate().output()),
                     new MenuItem("4. View all toys", () -> new ViewAllToysTemplate().output()),
-                    new MenuItem("5. Receipt of toy", () -> new ReceiptToyTemplate().output()),
-                    new MenuItem("6. Issue of toy", () -> new IssueToysTemplate().output()),
-                    new MenuItem("7. Exit", () -> new ExitTemplate().output())
+                    new MenuItem("5. Stock balance", () -> new StockbalanceTemplate().output()),
+                    new MenuItem("6. Receipt of toy", () -> new ReceiptToyTemplate().output()),
+                    new MenuItem("7. Issue of toy", () -> new IssueToysTemplate().output()),
+                    new MenuItem("8. Exit", () -> new ExitTemplate().output())
             }
     );
 }
