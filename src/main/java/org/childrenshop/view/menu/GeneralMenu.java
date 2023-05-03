@@ -17,7 +17,8 @@ public interface GeneralMenu {
                     new MenuItem("6. Receipt of toy", () -> new ReceiptToyTemplate().output()),
                     new MenuItem("7. Issue of toy", () -> new IssueToysTemplate().output()),
                     new MenuItem("8. Toy lottery", () -> new ToyLotteryTemplate().output()),
-                    new MenuItem("9. Exit", () -> new ExitTemplate().output())
+                    new MenuItem("9. Give away a prize toy", () -> new GiveAwayToyTemplate().output()),
+                    new MenuItem("10. Exit", () -> new ExitTemplate().output())
             }
     );
 }

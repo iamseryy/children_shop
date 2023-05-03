@@ -10,7 +10,7 @@ public class ToyLotteryTemplate implements Template {
     public void output() {
         ui.output("\nToy lottery");
 
-        if (stockService.findAll().size() == 0) {
+        if (stockService.findAll().size() - lotteryService.countWonToys() <= 0) {
             ui.output("\nOut of stock\n");
             ui.output("\nlottery is cancelled\n");
             ui.pressEnterToContinue();

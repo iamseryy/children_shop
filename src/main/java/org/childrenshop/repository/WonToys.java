@@ -7,4 +7,7 @@ public interface WonToys <T> {
     void add(int toyId);
     Optional<T> findById(int id);
     Optional<Integer> poll();
+    Optional<Integer> peek();
+    int countToyById(int id);
+    int countToys();
 }

@@ -6,6 +6,7 @@ import org.childrenshop.repository.WonToys;
 import org.childrenshop.utils.FileUtils;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class WonToysImpl implements WonToys {
     private static Deque<Integer> wonToys = new ArrayDeque<>();
@@ -34,6 +35,21 @@ public class WonToysImpl implements WonToys {
     @Override
     public Optional<Integer> poll() {
         return  Optional.ofNullable(this.wonToys.pollFirst());
+    }
+
+    @Override
+    public Optional<Integer> peek() {
+        return  Optional.ofNullable(this.wonToys.peekFirst());
+    }
+
+    @Override
+    public int countToyById(int id) {
+        return (int) wonToys.stream().filter(item -> item == id).count();
+    }
+
+    @Override
+    public int countToys(){
+        return this.wonToys.size();
     }
 
     private void writeAll(){

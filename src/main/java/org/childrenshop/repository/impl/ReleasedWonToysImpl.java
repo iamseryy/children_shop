@@ -1,23 +1,16 @@
 package org.childrenshop.repository.impl;
 
+import org.childrenshop.config.AppConfig;
+import org.childrenshop.model.Toy;
 import org.childrenshop.repository.ReleasedWonToys;
+import org.childrenshop.utils.FileUtils;
 
-import java.util.Optional;
 
 public class ReleasedWonToysImpl implements ReleasedWonToys {
 
     @Override
-    public int add(Object entity) {
-        return 0;
-    }
-
-    @Override
-    public Optional findById(int id) {
-        return Optional.empty();
-    }
-
-    @Override
-    public void delete(Object entity) {
-
+    public void add(Object entity) {
+        FileUtils.writeFile(((Toy) entity).toString() + "\n", AppConfig.getProperty("file.released_won_toys"), true);
     }
 }
+
